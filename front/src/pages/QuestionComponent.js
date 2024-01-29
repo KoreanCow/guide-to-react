@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+
 const QuestionComponent = () => {
   const [state, setState] = useState([]);
-  const postdata = [{ id: 'postdata', text: 'seoul-gandong' }]
+  const postdata = { id: 'postdata', text: 'seoul-gandong' }
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 이 부부은 Link 모듈을 사용했을때 url을 통해 이동했을 때
@@ -20,19 +22,11 @@ const QuestionComponent = () => {
     fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
 
   }, []);
-
-  const nav = useNavigate();
-
   const onClickHanlder = async () => {
     try {
       const response = await axios.post('http://localhost:5001/result', { postdata }); // postdata 변수를 객체로 전달
       console.log(response);
-
-      // if (!response || response.status !== 200) {
-      //   return;
-      // }
-
-      // nav("/result");
+      navigate("/result", { state: { value: response.data } });
     } catch (e) {
       console.log(e);
     }
