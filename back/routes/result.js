@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
+// http://localhost:5001/result
 router.post('/', function (req, res, next) {
   console.log(req.body);
   const test = req.body;

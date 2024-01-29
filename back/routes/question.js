@@ -17,6 +17,8 @@ const testData = [{
   id: 5,
   text: 'test 5'
 },]
+
+// http://localhost:5001/question
 router.get('/', function (req, res, next) {
   res.json(testData);
 });
