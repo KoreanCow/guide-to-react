@@ -1,0 +1,83 @@
+.PageContainer {
+  width: 400px;
+  background-color: #ffe5c8;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.TitleContainer {
+  display: flex;
+  // margin-top: 10%;
+  position: absolute;
+  top: -140px;
+  left: -40px;
+}
+
+.DeliveryImage {
+  width: 144px;
+  height: 138px;
+  z-index: 3;
+  margin-left: 10px;
+}
+
+.Title {
+  font-size: 1.5em;
+  margin-top: 13%;
+  margin-left: -10px;
+}
+
+.TitleTextGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-size: 1em;
+}
+
+.TitleText {
+  font-weight: normal;
+}
+
+.ContentBox {
+  background: #ffffff;
+  width: 80%;
+  margin: 20px 0;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+
+.Content {
+  font-size: 1.3em;
+}
+
+.ButtonsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.Button {
+  background: #ffb703;
+  border: 1px solid #000;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px 15px;
+  margin-right: 3px;
+  margin-top: 30px;
+  color: white;
+  font-size: 0.85em;
+  font-weight: 800;
+  text-align: center;
+}
+
+.Button:hover {
+    background-color: #fcddb9;
+    color:#000;
+    cursor: pointer;
+}

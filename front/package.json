@@ -1,6 +1,6 @@
 {
   "name": "front",
-  "proxy": "http://localhost:5001",
+  "proxy": "http://localhost:8080",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,11 +9,13 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
     "react": "^18.2.0",
+    "react-cookie": "^7.0.2",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
+    "sass": "^1.71.1",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },

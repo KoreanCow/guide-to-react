@@ -12,17 +12,17 @@ const resultRouter = require('./routes/result');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const corsOptions = {
+  origin: 'http://localhost:3000', // 특정 출처만 허용
+  credentials: true, // 인증 정보를 포함한 요청 허용
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json())
 
 app.use('/', indexRouter);
