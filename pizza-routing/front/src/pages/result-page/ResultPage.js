@@ -18,6 +18,8 @@ const ResultsPage = () => {
         }, 1000);
       } catch (e) {
         console.error(e);
+        alert('UUID 없을 때의 에러메시지 준비하기');
+        //  잘못된 요청 
       }
     }
     fetchData();
