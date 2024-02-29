@@ -1,8 +1,12 @@
-node js
-react
+- Node.js | express
+- React |
 
-axios 를 통한 api 통신 방법 안내
-PIZZA프로젝트 예시
+## oauth 2.0 Testing
+
+## pizza-routing
+
+- axios 를 통한 api 통신 방법 안내
+  PIZZA프로젝트 예시
 
 프론트랑 백엔드 통신 과정 중
 
@@ -17,3 +21,5 @@ PIZZA프로젝트 예시
 2페이지에서 useEffect 또는 컴포넌트 렌더링 시에 axios 또는 다른 비동기 작업을 수행하여 데이터를 요청
 데이터를 받는 동안 로딩 페이지를 표시
 데이터를 받은 후에 2페이지에 대한 내용을 화면에 렌더링
+
+저는 2를 선호 함미다~
