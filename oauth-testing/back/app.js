@@ -4,17 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
-var signup = require('./routes/signup');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
+app.set('view engine', false);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 const corsOptions = {
   origin: 'http://localhost:3000', // 특정 출처만 허용
   credentials: true, // 인증 정보를 포함한 요청 허용
@@ -22,7 +25,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/', indexRouter);
-app.use('/signup', signup);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
