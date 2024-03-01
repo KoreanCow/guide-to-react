@@ -38,6 +38,14 @@ const SignUp = () => {
         <button type='submit'>
           회원가입
         </button>
+        <div>
+          <p>
+            Kakao
+          </p>
+          <p>
+            Google
+          </p>
+        </div>
       </form>
 
       <Link to='/' > Back to Root Page</Link>

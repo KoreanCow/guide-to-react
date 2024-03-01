@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import GitOauth from '../../components/callback/GitOauth';
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>('');
@@ -35,6 +36,7 @@ const SignIn = () => {
           로그인
         </button>
       </form>
+      <GitOauth />
       <Link to='/signup'>Sign Up</Link>
     </div>
   );
