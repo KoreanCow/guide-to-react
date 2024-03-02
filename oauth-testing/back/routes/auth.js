@@ -39,6 +39,10 @@ router.post('/github/callback', async (req, res) => {
   });
   const user = userResponse.data;
 
-  console.log('Github user: ', user.login)
+
+  const name = user.name;
+  const email = user.email;
+  const nickname = user.login
+  console.log('Github user: ', name, email, nickname)
 });
 module.exports = router;
