@@ -1,51 +1,20 @@
-import axios from 'axios'
-import path from 'path';
-import { useEffect } from 'react';
+import React from 'react';
+import axios from 'axios';
 
-export function Git(args: any) {
-
-  const clientID = "0f5ea9db841e2e0acbb0"
-  const secretKey = "00eb22c59144ac2ee96de9419537be900e887d1d";
-
-  const loginPath = `https://github.com/login/oauth/authorize?client_id=${clientID}`;
-  const handleOAuth = async () => {
-    const client = window.open(loginPath)
-
-  }
-
-  useEffect(() => {
-    const callbackCode = window.location.search.replace("?code=", "");
-    console.log(callbackCode)
-
-    if (!callbackCode) {
-      return;
+const Git = () => {
+  const handleGitLogin = async () => {
+    try {
+      window.location.href = 'http://localhost:8080/auth/github';
+    } catch (error) {
+      console.error('GitHub OAuth error:', error);
     }
+  };
 
-    (async () => {
-      console.log({
-        client_id: clientID,
-        client_secret: secretKey,
-        code: callbackCode,
-      })
-      const accessToken = await axios.post("https://github.com/login/oauth/access_token",
-        {
-          client_id: clientID,
-          client_secret: secretKey,
-          code: callbackCode,
-        })
-      console.log(accessToken)
-    })()
+  return (
+    <div>
+      <button onClick={handleGitLogin}>GitHub OAuth 로그인</button>
+    </div>
+  );
+};
 
-    // axios.get("https://api.github.com/user", {
-    //   headers: {
-    //     "Authorization": callbackCode
-    //   }
-    // }).then(console.log)
-
-
-  }, [])
-
-  return <div>
-    <button onClick={handleOAuth}>Login</button>
-  </div>
-}
+export default Git;

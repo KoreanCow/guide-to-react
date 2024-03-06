@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import GitOauth from '../../components/callback/GitOauth';
+import Git from '../../components/callback/Git';
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>('');
@@ -37,6 +38,7 @@ const SignIn = () => {
         </button>
       </form>
       <GitOauth />
+      {/* <Git /> */}
       <Link to='/signup'>Sign Up</Link>
     </div>
   );
