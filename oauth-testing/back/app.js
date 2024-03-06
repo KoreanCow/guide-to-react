@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -10,13 +11,14 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 
 var app = express();
-
-app.set('view engine', false);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(passport.initialize());
 
 const corsOptions = {
   origin: 'http://localhost:3000', // 특정 출처만 허용

@@ -1,10 +1,33 @@
 const express = require('express');
 const router = express.Router();
-require('dotenv').config();
 const axios = require('axios');
+// const passport = require('passport');
+// const GitHubStrategy = require('passport-github2').Strategy;
+
+require('dotenv').config();
 
 const clientId = process.env.GITHUB_CLIENT_ID;
 const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+
+// passport.use(new GitHubStrategy({
+//   clientID: clientId,
+//   clientSecret: clientSecret,
+//   callbackURL: 'http://localhost:3000/'
+// }, function (accessToken, refreshToken, profile, done) {
+//   done(null, profile);
+// }));
+
+// router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+
+// router.get('/github/callback',
+//   passport.authenticate('github', { session: false }),
+//   function (req, res) {
+//     res.send('User authenticated successfully!');
+//   }
+// );
+
+// module.exports = router;
+
 
 router.get('/', function (req, res, next) {
   res.json({ test: 'success' })
