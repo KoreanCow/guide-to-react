@@ -12,6 +12,7 @@
     "@types/node": "^16.18.90",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
+    "buffer": "^6.0.3",
     "ckeditor5-custom-build": "file:ckeditor5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -47,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-html-parser": "^2.0.6",
+    "react-html-parser": "^2.0.2"
   }
 }
