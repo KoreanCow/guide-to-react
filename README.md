@@ -1,5 +1,12 @@
 - Node.js | express
-- React |
+- React | Redux, Next.js, Ts, Js ...
+
+## guide-to-ckeditor5
+
+- 게시글 작성을 위한 게시판 CKeditor5 라이브러리를 이용!
+  추가로 react-html-parse 라이브러리를 이용해 html의 다양한 태그를
+  string으로 받은 후 파싱하여 렌더링
+  ++ React 18버전은 파싱 라이브러리 버전이 호환이 안돼 --force로 강제로 이용
 
 ## next-auth
 
@@ -18,6 +25,11 @@ component/GitOuath.tsx의 경우
 이벤트 발생 시 백엔드에 Client_ID, Secret_Key를 응답 받은 후
 authorization code를 백엔드에 보냄
 이 후 백엔드에서 로직 처리 후 유저의 아이디, 이메일 등 정보를 받아오는 로직
+
+## recoil-todo
+
+- Redux가아닌 다른 상태 관리 도구를 이용하여
+  간단한 투두리스트 생성 삭제 수정 앱!!
 
 ## pizza-routing
 
