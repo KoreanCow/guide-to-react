@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IPost } from '../redux/actions/postAction'
 
 
@@ -12,8 +12,9 @@ const Main = () => {
     setPosts(reduxPosts);
   }, [reduxPosts])
 
-  // console.log(posts);
+
   const navigate = useNavigate();
+
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     navigate('/write');
@@ -24,7 +25,11 @@ const Main = () => {
       main page
       <button onClick={onClickHandler}>글쓰러 가기</button>
       {posts.map((post) => (
-        <div key={post.id}>{post.title}</div>
+        <p key={post.id}>
+          <Link to={`/${post.id}`}>
+            {post.title}
+          </Link>
+        </p>
       ))}
     </div>
   );
