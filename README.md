@@ -1,12 +1,20 @@
 - Node.js | express
 - React | Redux, Next.js, Ts, Js ...
 
+## guide-to-socket-io
+
+- node - socket.io
+- react - socket.io-client
+  모듈을 이용하여 간단한 채팅 앱
+  리덕스로 message 관리
+- ++ React 18.2 버전은 material-ui/core 라이브러리 버전 호환 안돼 --force로 강제로 이용
+
 ## guide-to-ckeditor5
 
 - 게시글 작성을 위한 게시판 CKeditor5 라이브러리를 이용!
   추가로 react-html-parse 라이브러리를 이용해 html의 다양한 태그를
   string으로 받은 후 파싱하여 렌더링
-  ++ React 18버전은 파싱 라이브러리 버전이 호환이 안돼 --force로 강제로 이용
+- ++ React 18버전은 파싱 라이브러리 버전이 호환이 안돼 --force로 강제로 이용
 
 ## next-auth
 
