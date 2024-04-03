@@ -1,6 +1,15 @@
 - Node.js | express
 - React | Redux, Next.js, Ts, Js ...
 
+## socket-io-chat
+
+- node + react 소켓 io를 이용한 소켓통신으로
+  채팅방 목록 + 채팅방 구현 예정
+
+## guide-to-react-query
+
+- 리액트 쿼리를 이용한 간단한 투두리스트
+
 ## guide-to-socket-io
 
 - node - socket.io
