@@ -31,10 +31,6 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 
-io.on('connection', socket => {
-  console.log('New WS connection...');
-})
-
 // ---------------------------------------
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -56,23 +52,4 @@ server.listen(PORT, () => {
   console.log(`server listening on ${PORT}`);
 })
 
-// io.on('connection', (socket) => {
-//   console.log('A user connected');
-
-//   socket.on('joinRoom', (room) => {
-//     if (chatRooms.includes(room)) {
-//       socket.join(room);
-//       console.log(`User joined room ${room}`);
-//     } else {
-//       console.log(`Room ${room} does not exist`);
-//     }
-//   });
-
-//   socket.on('chatMessage', (data) => {
-//     io.to(data.room).emit('message', data.message);
-//   });
-
-//   socket.on('disconnect', () => {
-//     console.log('A user disconnected');
-//   });
-// });
+module.exports = { app, io }
