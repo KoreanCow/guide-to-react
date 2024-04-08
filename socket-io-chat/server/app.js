@@ -29,8 +29,36 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
+const chatRooms = ['chat1', 'chat2', 'chat3'];
+app.get('/', (req, res) => {
+  res.json(chatRooms);
+});
 
+
+app.post('/', (req, res) => {
+  const body = req.body;
+  const roomName = body.roomName;
+  chatRooms.push(roomName);
+
+  const namespace = io.of(`/${roomName}`);
+
+  namespace.on('connection', (socket) => {
+    console.log(`New connection in ${roomName} room`);
+
+  });
+
+  res.json(chatRooms);
+});
+
+
+chatRooms.forEach(chatRoom => {
+  const namespace = io.of(`/${chatRoom}`);
+  namespace.on('connection', (socket) => {
+    console.log(`New connection in ${chatRoom} room`);
+    // Handle events for each chat room here
+  });
+});
 // ---------------------------------------
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
