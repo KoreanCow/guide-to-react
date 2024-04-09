@@ -6,7 +6,6 @@ const cors = require('cors');
 const http = require('http');
 const socketio = require('socket.io')
 require('dotenv').config();
-const indexRouter = require('./routes/index');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -29,12 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// app.use('/', indexRouter);
-const chatRooms = ['chat1', 'chat2', 'chat3'];
+// ---------------------------------------
+const chatRooms = [];
 app.get('/', (req, res) => {
   res.json(chatRooms);
 });
-
 
 app.post('/', (req, res) => {
   const body = req.body;
@@ -44,20 +42,14 @@ app.post('/', (req, res) => {
   const namespace = io.of(`/${roomName}`);
 
   namespace.on('connection', (socket) => {
-    console.log(`New connection in ${roomName} room`);
-
+    console.log(`New connection in ${roomName} room post`);
+    socket.on('message', ({ username, message }) => {
+      console.log(username, message)
+      namespace.emit('message', { username, message });
+    })
   });
 
   res.json(chatRooms);
-});
-
-
-chatRooms.forEach(chatRoom => {
-  const namespace = io.of(`/${chatRoom}`);
-  namespace.on('connection', (socket) => {
-    console.log(`New connection in ${chatRoom} room`);
-    // Handle events for each chat room here
-  });
 });
 // ---------------------------------------
 // catch 404 and forward to error handler
