@@ -11,10 +11,20 @@ const instance = axios.create({
 let accessToken: string | null = null;
 
 instance.interceptors.request.use(
-  (config) => {
-    // 요청 전에 액세스 토큰이 있는지 확인하고 헤더에 추가
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+  async (config) => {
+    if (!accessToken) return config;
+
+    try {
+      const response = await axios.post('/api/users/refresh-token', {}, {
+        withCredentials: true // 쿠키를 포함한 요청을 보내기 위해 설정
+      });
+      const newAccessToken = response.data.accessToken;
+
+      setAccessToken(newAccessToken);
+
+      config.headers.Authorization = `Bearer ${newAccessToken}`;
+    } catch (err) {
+      console.error(err);
     }
     return config;
   },
@@ -22,10 +32,7 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
 export const setAccessToken = (token: string) => {
   accessToken = token;
-};
-
-
+}
 export default instance;

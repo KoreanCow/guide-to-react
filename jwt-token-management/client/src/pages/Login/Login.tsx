@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
+import instance, { setAccessToken } from '../../api/axios';
+import { useCookies } from 'react-cookie';
 
 interface State {
   id: string;
@@ -10,6 +12,8 @@ interface State {
 const Login = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<State>({ id: '', password: '' });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cookies, setCookie] = useCookies(['refreshToken']);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -17,11 +21,15 @@ const Login = () => {
       [e.target.name]: e.target.value
     });
   }
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { id, password } = state;
-      console.log(id, password);
+      const response = await instance.post('/api/users/login', { id, password })
+
+      const { accessToken, refreshToken } = response.data;
+      setAccessToken(accessToken);
+      setCookie('refreshToken', refreshToken, { path: '/' })
 
     } catch (err) {
       console.error(err);
