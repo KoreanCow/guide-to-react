@@ -1,6 +1,11 @@
 - Node.js | express
 - React | Redux, Next.js, Ts, Js ...
 
+## jwt-token-managemnet
+
+- 백엔드에서 refreshToken, accessToken을 발급받고
+- 이를 프론트에선 각각 쿠키, axios 인터셉터를 이용하여 관리
+
 ## socket-io-chat
 
 - node + react 소켓 io를 이용한 소켓통신
