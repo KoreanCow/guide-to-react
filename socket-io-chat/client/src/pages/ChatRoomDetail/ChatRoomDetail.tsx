@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,17 +18,29 @@ const ChatRoomDetail = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-
   const chatRooms = useSelector((state: any) => state.chat).find((room: any) => room.roomname === roomname)?.messages || [];
+
   useEffect(() => {
     const newSocket = io(`${process.env.REACT_APP_SERVER_URL}/${roomname}`, { withCredentials: true });
     setSocket(newSocket);
-    console.log(`${roomname} room socket connected`)
+    console.log(`${roomname} room socket connected`);
+
+    const cleanup = () => {
+      if (newSocket) {
+        newSocket.disconnect();
+        console.log('Socket disconnected');
+      }
+    };
+
+    window.addEventListener('beforeunload', cleanup);
+
     return () => {
-      newSocket.disconnect();
-      console.log('exit chat room')
-    }
-  }, [])
+      cleanup();
+      window.removeEventListener('beforeunload', cleanup);
+      console.log('exit chat room');
+    };
+  }, []);
+
   useEffect(() => {
     if (socket) {
       socket.on('message', (data) => {
@@ -42,7 +53,7 @@ const ChatRoomDetail = () => {
         }
       });
     }
-  }, [socket])
+  }, [socket]);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();

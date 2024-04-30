@@ -47,7 +47,11 @@ app.post('/', (req, res) => {
       console.log(username, message)
       namespace.emit('message', { username, message });
     })
+    socket.on('disconnect', () => {
+      console.log(`User disconnected from ${roomName}`);
+    });
   });
+
 
   res.json(chatRooms);
 });
