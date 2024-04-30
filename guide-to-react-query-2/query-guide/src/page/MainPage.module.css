@@ -1,0 +1,11 @@
+.main__container {
+  width: 100dvw;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main__title {
+  font-size: 30px;
+}
