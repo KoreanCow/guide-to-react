@@ -1,0 +1,12 @@
+.App {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#map {
+  width: 90%;
+  height: 90%;
+}
