@@ -20,6 +20,10 @@ const UseSdk = () => {
     const showPosition = (position: GeolocationPosition) => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
+      const map = mapRef.current;
+      if (map) {
+        map.setCenter(new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      }
     };
 
     const showError = (error: GeolocationPositionError) => {
