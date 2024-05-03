@@ -92,8 +92,8 @@ const PickMarker = () => {
           clickable={true}
           onClick={() => setIsOpen(!isOpen)}
           position={{
-            lat: myLat,
-            lng: myLot
+            lat: latitude,
+            lng: longitude,
           }}
         >
           {isOpen && <div style={{ padding: "5px", color: "#000" }}>현재 내 위치!!</div>}
