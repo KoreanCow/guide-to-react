@@ -7,7 +7,7 @@ const PickMarker = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isWalk, setIsWalk] = useState<boolean>(false);
   const [startWalkLocation, setStartWalkLocation] = useState<{ lat: number, lng: number } | null>(null);
-  const [distance, setDistance] = useState<number | null>(null);
+  const [distance, setDistance] = useState<number>(0); // 초기값을 0으로 설정
 
   const mapRef = useRef<kakao.maps.Map>(null);
 
@@ -39,15 +39,23 @@ const PickMarker = () => {
     getLocation();
   }, []);
 
+  useEffect(() => {
+    // 산책 중인 경우에만 거리 계산
+    if (isWalk && startWalkLocation) {
+      const dist = calculateDistance(latitude, longitude, startWalkLocation.lat, startWalkLocation.lng);
+      setDistance(dist);
+    }
+  }, [latitude, longitude, isWalk, startWalkLocation]);
+
   const startWalk = () => {
     setIsWalk(!isWalk);
-    if (isWalk) {
-      setStartWalkLocation(null);
-      setDistance(null);
-    } else {
+    if (!isWalk) {
       if (latitude && longitude) {
         setStartWalkLocation({ lat: latitude, lng: longitude });
       }
+    } else {
+      setStartWalkLocation(null);
+      setDistance(0); // 산책 종료 시 거리 초기화
     }
   };
 
@@ -108,7 +116,7 @@ const PickMarker = () => {
       <button onClick={startWalk}>
         {isWalk ? '산책 종료' : '산책 시작'}
       </button>
-      {distance !== null && <div>산책 거리: {distance.toFixed(2)} km</div>}
+      <div>산책 거리: {distance.toFixed(2)} km</div>
     </div>
   );
 };
