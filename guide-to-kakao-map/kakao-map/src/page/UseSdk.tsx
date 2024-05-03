@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import useGetLocation from '../hooks/useGetLocation';
 
 const UseSdk = () => {
+  const { myLat, myLot } = useGetLocation();
   const [latitude, setLatitude] = useState<number>(33);
   const [longitude, setLongitude] = useState<number>(31);
   const [level, setLevel] = useState(3);
@@ -45,7 +47,16 @@ const UseSdk = () => {
       setLevel(map.getLevel());
     }
   };
+  const panTo = ({ lat, lng }: any) => {
+    setLatitude(lat);
+    setLongitude(lng);
+  }
 
+
+  const setMyLocation = () => {
+    setLatitude(myLat);
+    setLongitude(myLot);
+  }
   return (
     <div className="App">
       <Map
@@ -65,8 +76,12 @@ const UseSdk = () => {
           }}
         />
       </Map>
-      <button onClick={() => handleLevel('decrease')}>Zoom In</button>
-      <button onClick={() => handleLevel('increase')}>Zoom Out</button>
+      <div className='btn_box'>
+        <button onClick={() => handleLevel('decrease')}>Zoom In</button>
+        <button onClick={() => handleLevel('increase')}>Zoom Out</button>
+        <button onClick={() => panTo({ lat: 33.45058, lng: 126.574942 })}>Move to KaKao</button>
+        <button onClick={setMyLocation}>Move to My Location</button>
+      </div>
     </div>
   );
 };

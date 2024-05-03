@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import NoSdk from './page/NoSdk';
 import Main from './page/Main';
 import UseSdk from './page/UseSdk';
 import { useKakaoLoader } from 'react-kakao-maps-sdk';
+import PickMarker from './page/PickMarker';
 
 function App() {
   const [loading, error] = useKakaoLoader({
@@ -16,8 +15,8 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Main />} />
-      <Route path='/nosdk' element={<NoSdk />} />
       <Route path='/usesdk' element={<UseSdk />} />
+      <Route path='/pick' element={<PickMarker />} />
     </Routes>
   )
 }
