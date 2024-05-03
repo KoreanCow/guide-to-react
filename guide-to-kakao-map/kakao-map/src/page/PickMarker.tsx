@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import useGetLocation from '../hooks/useGetLocation';
 
@@ -9,18 +9,47 @@ const PickMarker = () => {
   const [startWalkLocation, setStartWalkLocation] = useState<{ lat: number, lng: number } | null>(null);
   const [distance, setDistance] = useState<number | null>(null);
 
+  const mapRef = useRef<kakao.maps.Map>(null);
+
+  const [latitude, setLatitude] = useState<number>(33);
+  const [longitude, setLongitude] = useState<number>(31);
+
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition, showError);
+      } else {
+        alert('브라우저에서 Geolocation이 지원되지 않습니다.');
+      }
+    };
+
+    const showPosition = (position: GeolocationPosition) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+      const map = mapRef.current;
+      if (map) {
+        map.setCenter(new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      }
+    };
+
+    const showError = (error: GeolocationPositionError) => {
+      alert('Geolocation 오류: ' + error.message);
+    };
+
+    getLocation();
+  }, []);
+
   const startWalk = () => {
     setIsWalk(!isWalk);
     if (isWalk) {
-      setStartWalkLocation(null); // 산책 종료 시 시작 위치 초기화
-      setDistance(null); // 산책 종료 시 거리 초기화
+      setStartWalkLocation(null);
+      setDistance(null);
     } else {
       if (startWalkLocation) {
-        // startWalkLocation이 null이 아닌 경우에만 거리 계산
         const dist = calculateDistance(myLat, myLot, startWalkLocation.lat, startWalkLocation.lng);
-        setDistance(dist); // 거리 설정
+        setDistance(dist);
       }
-      setStartWalkLocation({ lat: myLat, lng: myLot }); // 산책 시작 시 시작 위치 설정
+      setStartWalkLocation({ lat: myLat, lng: myLot });
     }
   };
 
@@ -32,7 +61,7 @@ const PickMarker = () => {
       Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c; // Distance in km
+    const d = R * c;
     return d;
   };
 
@@ -44,7 +73,12 @@ const PickMarker = () => {
     <div className='App'>
       <Map
         id='map'
-        center={{ lat: myLat, lng: myLot }}
+        center={{
+          lat: latitude,
+          lng: longitude,
+        }}
+        zoomable={true}
+        ref={mapRef}
       >
         {/* 현재 위치 마커 */}
         <MapMarker
