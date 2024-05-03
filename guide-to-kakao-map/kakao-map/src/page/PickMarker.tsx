@@ -11,8 +11,8 @@ const PickMarker = () => {
 
   const mapRef = useRef<kakao.maps.Map>(null);
 
-  const [latitude, setLatitude] = useState<number>(33);
-  const [longitude, setLongitude] = useState<number>(31);
+  const [latitude, setLatitude] = useState<number>(myLat); // 초기값 설정
+  const [longitude, setLongitude] = useState<number>(myLot); // 초기값 설정
 
   useEffect(() => {
     const getLocation = () => {
@@ -45,11 +45,9 @@ const PickMarker = () => {
       setStartWalkLocation(null);
       setDistance(null);
     } else {
-      if (startWalkLocation) {
-        const dist = calculateDistance(myLat, myLot, startWalkLocation.lat, startWalkLocation.lng);
-        setDistance(dist);
+      if (latitude && longitude) {
+        setStartWalkLocation({ lat: latitude, lng: longitude });
       }
-      setStartWalkLocation({ lat: myLat, lng: myLot });
     }
   };
 
