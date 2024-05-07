@@ -1,26 +1,59 @@
-import React from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Stars, Sphere } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+
+import React, { useRef } from 'react';
 import * as THREE from 'three';
+import './App.css'
+import { Mesh } from 'three';
 
-function Sphere() {
+function TestSphere() {
+  const meshRef = useRef<Mesh | null>(null);
+
+  useFrame(() => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += 0.001;
+      meshRef.current.rotation.y += 0.001;
+
+    }
+  })
   return (
-    <mesh rotation={[Math.PI / 4, Math.PI / 4, 0]}>
-      <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial color="red" roughness={0.5} metalness={0.5} />
+    <mesh ref={meshRef}>
+      <Sphere args={[1, 32, 32]} position={[0, 0, 0]} />
     </mesh>
-  );
+  )
 }
 
-function Scene() {
+function BackgroundStars() {
+  const sceneRef = useRef<Mesh | null>(null);
+
+  useFrame(() => {
+    if (sceneRef.current) {
+      sceneRef.current.rotation.x += 0.001;
+      sceneRef.current.rotation.y += 0.001;
+    }
+  })
   return (
-    <Canvas>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[5, 5, 5]} angle={0.15} penumbra={1} />
-      <Sphere />
-      <OrbitControls />
-    </Canvas>
+    <mesh ref={sceneRef}>
+      <Stars />
+    </mesh>
+  )
+}
+function App() {
+
+  return (
+    <div className='body'>
+      <div className='container'>
+        <Canvas>
+          <OrbitControls />
+          <ambientLight intensity={0.5} />
+          {/* <Stars /> */}
+          <BackgroundStars />
+          <TestSphere />
+
+        </Canvas>
+      </div>
+    </div>
   );
 }
 
-export default Scene;
+export default App;
