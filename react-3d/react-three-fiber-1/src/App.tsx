@@ -1,10 +1,19 @@
-import { OrbitControls, Stars, Sphere } from '@react-three/drei';
+import { OrbitControls, Stars, Dodecahedron, Sphere } from '@react-three/drei';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import './App.css';
 import { Mesh } from 'three';
 
+
+function TestDode() {
+  // const texture = useLoader(THREE.TextureLoader, '/public/flower.svg');
+  return (
+    <mesh>
+      <Dodecahedron args={[1, 5]} />
+    </mesh>
+  )
+}
 function TestSphere() {
   const meshRef = useRef<Mesh | null>(null);
   const texture = useLoader(THREE.TextureLoader, '/public/flower.svg');
@@ -69,7 +78,9 @@ function BackgroundStars() {
 
   return (
     <mesh ref={sceneRef}>
-      <Stars />
+      {/* <Sky></Sky> */}
+      <Stars factor={6} />
+      {/* 팩터 추가  */}
     </mesh>
   );
 }
@@ -82,7 +93,24 @@ function App() {
           <OrbitControls />
           <ambientLight intensity={0.5} />
           <BackgroundStars />
-          <SphereComponent positions={[4, 0, 0]} />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <BackgroundStars />
+          <TestDode />
+          <SphereComponent positions={[4, 8, 0]} />
           <TestSphere />
 
         </Canvas>
