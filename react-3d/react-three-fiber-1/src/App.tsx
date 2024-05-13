@@ -7,8 +7,8 @@ import { Mesh } from 'three';
 
 function SphereComponent({ positions }: { positions: [number, number, number] }) {
   const meshRef = useRef<Mesh | null>(null);
-  const texture = useLoader(THREE.TextureLoader, '/public/test.jpeg');
-
+  // const texture = useLoader(THREE.TextureLoader, '/public/test.jpeg');
+  const texture = useLoader(THREE.TextureLoader, 'test.jpeg');
   texture.repeat.set(2, 2);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
