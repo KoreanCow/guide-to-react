@@ -96,6 +96,7 @@ function App() {
           <SphereComponent positions={[6, 0, 0]} progress={0.9} />
           <SphereComponent positions={[9, 0, 0]} progress={1} />
           {/* <TestSphere /> */}
+          <Stars></Stars>
         </Canvas>
       </div>
     </div>
