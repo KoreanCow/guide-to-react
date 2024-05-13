@@ -5,13 +5,19 @@ import * as THREE from 'three';
 import './App.css';
 import { Mesh } from 'three';
 
-function SphereComponent({ positions }: { positions: [number, number, number] }) {
+interface Terraforming {
+  positions: [number, number, number];
+  progress: number;
+}
+function SphereComponent({ positions, progress }: Terraforming) {
   const meshRef = useRef<Mesh | null>(null);
-  // const texture = useLoader(THREE.TextureLoader, '/public/test.jpeg');
   const texture = useLoader(THREE.TextureLoader, 'test.jpeg');
   texture.repeat.set(2, 2);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
+
+  // progress에 따라 적절한 색상을 선택
+  const materialColor = `0x${progress}${progress}${progress}${progress}${progress}${progress}`;
 
   useFrame(() => {
     if (meshRef.current) {
@@ -23,14 +29,22 @@ function SphereComponent({ positions }: { positions: [number, number, number] })
   return (
     <group position={positions}>
       <mesh ref={meshRef}>
+        <Starparticles isComplete={progress >= 10} />
         <Sphere args={[1, 32, 32]} position={[0, 0, 0]} >
-          <meshBasicMaterial attach='material' map={texture} />
+          {
+            progress == 10 ?
+              <meshBasicMaterial attach='material' map={texture} />
+              :
+              <meshBasicMaterial color={parseInt(materialColor)} attach='material' map={texture} />
+
+          }
         </Sphere>
       </mesh>
     </group>
   );
 }
-function Starparticles() {
+
+function Starparticles({ isComplete }: { isComplete: boolean }) {
   const sceneRef = useRef<Mesh | null>(null);
 
   useFrame(() => {
@@ -41,9 +55,14 @@ function Starparticles() {
   });
 
   return (
-    <mesh ref={sceneRef}>
-      <Stars factor={0.2} radius={0.001} depth={0.6} speed={10} fade count={100} />
-    </mesh>
+    <>
+      {isComplete ? (
+        <Stars factor={0.2}
+          radius={0.005}
+          depth={0.65}
+          speed={10} fade count={100} />
+      ) : null}
+    </>
   );
 }
 
@@ -54,10 +73,10 @@ function App() {
         <Canvas>
           <OrbitControls />
           <ambientLight intensity={0.5} />
-          <Starparticles />
-          <SphereComponent positions={[0, 0, 0]} />
-          <SphereComponent positions={[5, 2, 5]} />
-          <SphereComponent positions={[10, 10, 10]} />
+          <SphereComponent positions={[0, 0, 0]} progress={2} />
+          <SphereComponent positions={[3, 0, 0]} progress={5} />\
+          <SphereComponent positions={[6, 0, 0]} progress={9} />
+          <SphereComponent positions={[9, 0, 0]} progress={10} />
         </Canvas>
       </div>
     </div>
