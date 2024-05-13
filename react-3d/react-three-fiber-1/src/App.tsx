@@ -9,15 +9,34 @@ interface Terraforming {
   positions: [number, number, number];
   progress: number;
 }
+
+// function TestSphere() {
+
+//   const meshRef = useRef<Mesh | null>(null);
+//   const texture = useLoader(THREE.TextureLoader, 'test.jpeg');
+//   useFrame(() => {
+//     if (meshRef.current) {
+//       meshRef.current.rotation.x += 0.003;
+//       meshRef.current.rotation.y += 0.001;
+//     }
+//   });
+//   return (
+//     <group >
+//       <mesh ref={meshRef}>
+//         <Sphere args={[1, 32, 32]} position={[0, 3, 0]} >
+//      
+//           <meshStandardMaterial map={texture} attach='material' transparent opacity={0.95} />
+//         </Sphere>
+//       </mesh>
+//     </group>
+//   );
+// }
 function SphereComponent({ positions, progress }: Terraforming) {
   const meshRef = useRef<Mesh | null>(null);
   const texture = useLoader(THREE.TextureLoader, 'test.jpeg');
   texture.repeat.set(2, 2);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-
-  // progress에 따라 적절한 색상을 선택
-  const materialColor = `0x${progress}${progress}${progress}${progress}${progress}${progress}`;
 
   useFrame(() => {
     if (meshRef.current) {
@@ -29,14 +48,13 @@ function SphereComponent({ positions, progress }: Terraforming) {
   return (
     <group position={positions}>
       <mesh ref={meshRef}>
-        <Starparticles isComplete={progress >= 10} />
+        <Starparticles isComplete={progress == 1} />
         <Sphere args={[1, 32, 32]} position={[0, 0, 0]} >
           {
-            progress == 10 ?
+            progress == 1 ?
               <meshBasicMaterial attach='material' map={texture} />
               :
-              <meshBasicMaterial color={parseInt(materialColor)} attach='material' map={texture} />
-
+              <meshStandardMaterial map={texture} attach='material' transparent opacity={progress} />
           }
         </Sphere>
       </mesh>
@@ -73,10 +91,11 @@ function App() {
         <Canvas>
           <OrbitControls />
           <ambientLight intensity={0.5} />
-          <SphereComponent positions={[0, 0, 0]} progress={2} />
-          <SphereComponent positions={[3, 0, 0]} progress={5} />\
-          <SphereComponent positions={[6, 0, 0]} progress={9} />
-          <SphereComponent positions={[9, 0, 0]} progress={10} />
+          <SphereComponent positions={[0, 0, 0]} progress={0.2} />
+          <SphereComponent positions={[3, 0, 0]} progress={0.5} />
+          <SphereComponent positions={[6, 0, 0]} progress={0.9} />
+          <SphereComponent positions={[9, 0, 0]} progress={1} />
+          {/* <TestSphere /> */}
         </Canvas>
       </div>
     </div>
