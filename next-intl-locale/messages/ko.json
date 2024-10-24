@@ -1,0 +1,17 @@
+{
+  "Index" : {
+    "title": "안녕, 세상",
+    "description": "Welcome"
+  },
+  "NotFoundPage": {
+    "title": "Page Not Found",
+    "description": "Ooops!"
+  },
+  "Navigation": {
+    "home": "홈"
+  },
+  "Footer": {
+    "copyright": "testing"
+  }
+
+}

@@ -1,0 +1,17 @@
+{
+  "Index" : {
+    "title": "Hello, World!",
+    "description": "Welcome"
+  },
+  "NotFoundPage": {
+    "title": "Page Not Found",
+    "description": "Ooops!"
+  },
+  "Navigation": {
+    "home": "Home"
+  },
+  "Footer": {
+    "copyright": "testing"
+  }
+
+}
