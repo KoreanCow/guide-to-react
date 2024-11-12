@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.scss";
 import SessionWrapper from '../../components/SessionWrapper';
-
+import styles from './page.module.scss'
+import NavigationBar from '../../components/NavigationBar';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="kr">
       <body>
         <SessionWrapper>
-          {children}
+          <div className={styles.page}>
+            <NavigationBar />
+            {children}
+          </div>
         </SessionWrapper>
       </body>
     </html>
